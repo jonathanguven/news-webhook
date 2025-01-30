@@ -1,4 +1,3 @@
-import requests
-import logging
-from apscheduler.schedulers.background import BackgroundScheduler
-from app.config import DISCORD_WEBHOOK_URL
+#!/bin/bash
+source venv/bin/activate
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
