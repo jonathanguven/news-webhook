@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.scheduler import scheduler
+from app.scheduler import scheduler, poll_news
 
 app = FastAPI()
 
@@ -9,9 +9,8 @@ def read_root():
 
 @app.get("/trigger")
 def trigger_job():
-  # Manually trigger a message to Discord
-  from app.scheduler import send_message
-  send_message()
+  # Manually trigger a news fetch
+  poll_news()
   return {"message": "Job triggered"}
 
 # Run scheduler when the application starts
