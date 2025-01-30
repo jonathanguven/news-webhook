@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-  return {"message": "Discord Webhook Scheduler is running!"}
+  return {"message": "News Webhook Scraper is running!"}
 
 @app.get("/trigger")
 def trigger_job():
