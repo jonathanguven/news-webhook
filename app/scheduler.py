@@ -1,4 +1,5 @@
 import logging
+import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.config import NEWS_SOURCES, DISCORD_WEBHOOK_URL
 from app.discord import send_discord_webhook

@@ -7,8 +7,8 @@ class NBC(NewsSource):
 
   def parse_article(self, article):
     return {
-      "title": article.title,
-      "url": article.link,
-      "description": article.summary if hasattr(article, "summary") else "No description available",
-      "image_url": article.media_content[0].url if "media_content" in article else None
+      "title": article["title"],
+      "url": article["link"],
+      "description": article["summary"] if "summary" in article else "No description available",
+      "image_url": article["media_content"][0]["url"] if "media_content" in article else None
     }
