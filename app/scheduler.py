@@ -4,12 +4,14 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from app.config import NEWS_SOURCES, DISCORD_WEBHOOK_URL
 from app.discord import send_discord_webhook
 from app.news_sources.nbc import NBC
+from app.news_sources.cbs import CBS
 
 logging.basicConfig(level=logging.INFO)
 scheduler = BackgroundScheduler()
 
 news_sources = [
   NBC(NEWS_SOURCES["nbc"]),
+  CBS(NEWS_SOURCES["cbs"]),
 ]
 
 # Sends a message to Discord channel via webhook
