@@ -34,7 +34,7 @@ class NewsSource(ABC):
     if self.last_article_id is None:
       self.last_article_id = article_id
       logging.info(f"Initializing last article id to {article_id}")
-      return None
+      return self.parse_article(latest_article)
 
     if article_id != self.last_article_id:
       self.last_article_id = article_id
