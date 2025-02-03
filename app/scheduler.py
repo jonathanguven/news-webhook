@@ -4,10 +4,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from app.config import NEWS_SOURCES, DISCORD_WEBHOOK_URL
 from app.discord import send_discord_webhook
 
-from app.news_sources.abc import ABC
-from app.news_sources.nbc import NBC
-from app.news_sources.nypost import NYPost
-from app.news_sources.forbes import Forbes
 from app.news_sources.standard_rss import StandardRSS
 
 logging.basicConfig(level=logging.INFO)
@@ -15,10 +11,28 @@ scheduler = BackgroundScheduler()
 
 news_sources = [
   StandardRSS("NBC News", NEWS_SOURCES["nbc"]),
-  StandardRSS("CBS News", NEWS_SOURCES["cbs"]),
+  StandardRSS("CBS News", NEWS_SOURCES["cbs"]),  # no image
   StandardRSS("NY Post", NEWS_SOURCES["nypost"]),
   StandardRSS("ABC News", NEWS_SOURCES["abc"]),
   StandardRSS("Forbes", NEWS_SOURCES["forbes"]),
+  StandardRSS("Bloomberg Tech", NEWS_SOURCES["bloomberg-tech"]),
+  StandardRSS("Bloomberg Markets", NEWS_SOURCES["bloomberg-markets"]),
+  StandardRSS("Bloomberg Politics", NEWS_SOURCES["bloomberg-politics"]),
+  StandardRSS("Bloomberg Wealth", NEWS_SOURCES["bloomberg-wealth"]),
+  StandardRSS("Apple", NEWS_SOURCES["apple"]),
+  StandardRSS("Google News", NEWS_SOURCES["google-news"]),  # no working RSS
+  StandardRSS("CNN", NEWS_SOURCES["cnn"]),
+  StandardRSS("CNBC", NEWS_SOURCES["cnbc"]),  # no image
+  StandardRSS("Washington Post", NEWS_SOURCES["washington-post"]),  # no image
+  StandardRSS("Fox News", NEWS_SOURCES["fox"]),
+  StandardRSS("Time", NEWS_SOURCES["time"]),  # no image
+  StandardRSS("USA Today", NEWS_SOURCES["usa-today"]),  # no working RSS
+  StandardRSS("Huffpost", NEWS_SOURCES["huffpost"]), # no image
+  StandardRSS("Economist", NEWS_SOURCES["economist"]),  # no image
+  StandardRSS("Independent", NEWS_SOURCES["independent"]),
+  StandardRSS("Buzzfeed", NEWS_SOURCES["buzzfeed"]),
+  StandardRSS("The Atlantic", NEWS_SOURCES["the-atlantic"]),  # no image
+  StandardRSS("National Geographic", NEWS_SOURCES["national-geographic"]),  # no working RSS
 ]
 
 # Sends a message to Discord channel via webhook

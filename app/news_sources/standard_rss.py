@@ -9,7 +9,7 @@ class StandardRSS(NewsSource):
     return {
       "title": article["title"],
       "url": article["link"],
-      "description": article["summary"] if hasattr(article, "summary") else "No description available",
+      "description": article["summary"] if hasattr(article, "summary") or article.get("description") else "No description available",
       "image_url": self.get_image_url(article),
     }
 
