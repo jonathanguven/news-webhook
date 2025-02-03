@@ -7,6 +7,7 @@ from app.discord import send_discord_webhook
 from app.news_sources.abc import ABC
 from app.news_sources.nbc import NBC
 from app.news_sources.nypost import NYPost
+from app.news_sources.forbes import Forbes
 from app.news_sources.standard_rss import StandardRSS
 
 logging.basicConfig(level=logging.INFO)
@@ -17,6 +18,7 @@ news_sources = [
   # StandardRSS("CBS News", NEWS_SOURCES["cbs"]),
   # NYPost(NEWS_SOURCES["nypost"]),
   # ABC(NEWS_SOURCES["abc"]),
+  Forbes(NEWS_SOURCES["forbes"]),
 ]
 
 # Sends a message to Discord channel via webhook
