@@ -1,9 +1,9 @@
 from app.news_sources.base import NewsSource
 
-class StandardRSS(NewsSource):
+class NBC(NewsSource):
 
-  def __init__(self, name, rss_url):
-    super().__init__(name, rss_url)
+  def __init__(self, rss_url):
+    super().__init__("NBC News", rss_url)
 
   def parse_article(self, article):
     return {

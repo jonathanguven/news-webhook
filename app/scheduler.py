@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 scheduler = BackgroundScheduler()
 
 news_sources = [
-  StandardRSS("NBC News", NEWS_SOURCES["nbc"]),
+  NBC(NEWS_SOURCES["nbc"]),
   StandardRSS("CBS News", NEWS_SOURCES["cbs"]),
 ]
 
