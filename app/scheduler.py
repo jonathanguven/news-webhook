@@ -14,11 +14,11 @@ logging.basicConfig(level=logging.INFO)
 scheduler = BackgroundScheduler()
 
 news_sources = [
-  # NBC(NEWS_SOURCES["nbc"]),
-  # StandardRSS("CBS News", NEWS_SOURCES["cbs"]),
-  # NYPost(NEWS_SOURCES["nypost"]),
-  # ABC(NEWS_SOURCES["abc"]),
-  Forbes(NEWS_SOURCES["forbes"]),
+  StandardRSS("NBC News", NEWS_SOURCES["nbc"]),
+  StandardRSS("CBS News", NEWS_SOURCES["cbs"]),
+  StandardRSS("NY Post", NEWS_SOURCES["nypost"]),
+  StandardRSS("ABC News", NEWS_SOURCES["abc"]),
+  StandardRSS("Forbes", NEWS_SOURCES["forbes"]),
 ]
 
 # Sends a message to Discord channel via webhook
