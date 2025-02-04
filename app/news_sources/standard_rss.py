@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+import html
 from app.news_sources.base import NewsSource
 
 class StandardRSS(NewsSource):
@@ -6,12 +8,17 @@ class StandardRSS(NewsSource):
     super().__init__(name, rss_url)
 
   def parse_article(self, article):
+    clean_description = self.clean_html(article.get("summary") or article.get("description") or "No description available")
     return {
       "title": article["title"],
       "url": article["link"],
-      "description": article["summary"] if hasattr(article, "summary") or article.get("description") else "No description available",
+      "description": clean_description,
       "image_url": self.get_image_url(article),
     }
+
+  def clean_html(self, text):
+    soup = BeautifulSoup(text, "html.parser")
+    return html.unescape(soup.get_text())
 
   def get_image_url(self, article):
 

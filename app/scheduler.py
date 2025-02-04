@@ -1,7 +1,9 @@
 import logging
-import requests
+import time
+import asyncio
+import aiohttp
 from apscheduler.schedulers.background import BackgroundScheduler
-from app.config import NEWS_SOURCES, DISCORD_WEBHOOK_URL
+from app.config import NEWS_SOURCES
 from app.discord import send_discord_webhook
 
 from app.news_sources.standard_rss import StandardRSS
@@ -20,44 +22,25 @@ news_sources = [
   StandardRSS("Bloomberg Politics", NEWS_SOURCES["bloomberg-politics"]),
   StandardRSS("Bloomberg Wealth", NEWS_SOURCES["bloomberg-wealth"]),
   StandardRSS("Apple", NEWS_SOURCES["apple"]),
-  StandardRSS("Google News", NEWS_SOURCES["google-news"]),  # no working RSS
+  # StandardRSS("Google News", NEWS_SOURCES["google-news"]),  # no working RSS
   StandardRSS("CNN", NEWS_SOURCES["cnn"]),
   StandardRSS("CNBC", NEWS_SOURCES["cnbc"]),  # no image
   StandardRSS("Washington Post", NEWS_SOURCES["washington-post"]),  # no image
   StandardRSS("Fox News", NEWS_SOURCES["fox"]),
   StandardRSS("Time", NEWS_SOURCES["time"]),  # no image
-  StandardRSS("USA Today", NEWS_SOURCES["usa-today"]),  # no working RSS
+  # StandardRSS("USA Today", NEWS_SOURCES["usa-today"]),  # no working RSS
   StandardRSS("Huffpost", NEWS_SOURCES["huffpost"]), # no image
   StandardRSS("Economist", NEWS_SOURCES["economist"]),  # no image
   StandardRSS("Independent", NEWS_SOURCES["independent"]),
   StandardRSS("Buzzfeed", NEWS_SOURCES["buzzfeed"]),
   StandardRSS("The Atlantic", NEWS_SOURCES["the-atlantic"]),  # no image
-  StandardRSS("National Geographic", NEWS_SOURCES["national-geographic"]),  # no working RSS
+  # StandardRSS("National Geographic", NEWS_SOURCES["national-geographic"]),  # no working RSS
 ]
 
-# Sends a message to Discord channel via webhook
-def send_message():
-  if not DISCORD_WEBHOOK_URL:
-    logging.error("Discord webhook URL not set")
-    return
-
-  payload = {
-    "content": "Hello, World!",
-  }
-
+# fetch an individual news source
+async def fetch_news_source(session, source):
   try:
-    response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
-    if response.status_code == 204:
-      logging.info("Message sent to Discord")
-    else:
-      logging.error("Failed to send message to Discord")
-  except Exception as e:
-    logging.error(f"Error sending message to Discord: {e}")
-
-# poll from all news sources
-def poll_news():
-  for source in news_sources:
-    article = source.fetch_news()
+    article = await source.fetch_news(session)
     if article:
       send_discord_webhook(
         title=article["title"],
@@ -66,7 +49,21 @@ def poll_news():
         image_url=article["image_url"],
         source_name=source.name
       )
+  except Exception as e:
+    logging.error(f"Error fetching news from {source.name}: {e}")
+
+# poll from all news sources
+async def poll_news():
+  start = time.time()
+  async with aiohttp.ClientSession() as session:
+    tasks = [fetch_news_source(session, source) for source in news_sources]
+    await asyncio.gather(*tasks)
+  end = time.time()
+  print(f"Fetching took {end - start:.2f} seconds")
+
+def schedule_async_poll():
+  asyncio.run(poll_news())
 
 # Schedule the poll_news function to run every minute
-scheduler.add_job(poll_news, 'interval', minutes=1)
+scheduler.add_job(schedule_async_poll, 'interval', minutes=1)
 scheduler.start()

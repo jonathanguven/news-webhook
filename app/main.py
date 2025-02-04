@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 from app.scheduler import scheduler, poll_news
 
 app = FastAPI()
@@ -8,9 +8,9 @@ def read_root():
   return {"message": "News Webhook Scraper is running!"}
 
 @app.get("/trigger")
-def trigger_job():
+def trigger_job(background_tasks: BackgroundTasks):
   # Manually trigger a news fetch
-  poll_news()
+  background_tasks.add_task(poll_news)
   return {"message": "Job triggered"}
 
 # Run scheduler when the application starts
