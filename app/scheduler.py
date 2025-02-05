@@ -29,7 +29,7 @@ news_sources = [
   StandardRSS("Fox News", NEWS_SOURCES["fox"]),
   StandardRSS("Time", NEWS_SOURCES["time"]),  # no image
   # StandardRSS("USA Today", NEWS_SOURCES["usa-today"]),  # no working RSS
-  StandardRSS("Huffpost", NEWS_SOURCES["huffpost"]), # no image
+  # StandardRSS("Huffpost", NEWS_SOURCES["huffpost"]), # no image
   StandardRSS("Economist", NEWS_SOURCES["economist"]),  # no image
   StandardRSS("Independent", NEWS_SOURCES["independent"]),
   StandardRSS("Buzzfeed", NEWS_SOURCES["buzzfeed"]),

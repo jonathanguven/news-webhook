@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 WEBHOOK_URLS = [
-  # "https://discord.com/api/webhooks/1336095023623831602/GwFASaUYNiEQa1T289ilhyItTimhF9wDohoCcb5tBchHsc-9R-T6puOEgB7xmaA7Yep_",
+  "https://discord.com/api/webhooks/1336095023623831602/GwFASaUYNiEQa1T289ilhyItTimhF9wDohoCcb5tBchHsc-9R-T6puOEgB7xmaA7Yep_",
   "https://discord.com/api/webhooks/1336499018750103562/HK3idGyNQOo0wX_NDWjstBmcBsGM2cIwZofKDqeR-RSw80bJ9uQEtSGHmOEJB6yy54rC"
 ]
 
