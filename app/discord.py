@@ -26,7 +26,7 @@ def send_discord_webhook(title, url, description, image_url, source_name):
     for webhook in WEBHOOK_URLS:
       response = requests.post(webhook, data=json.dumps(payload), headers=headers)
       if response.status_code == 204:
-        logging.info(f"Sent: {title}")
+        logging.info(f"Sent from {source_name}: {title}")
       else:
         logging.error(f"Failed to send: {response.status_code}, {response.text}")
   except Exception as e:
