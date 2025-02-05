@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 WEBHOOK_URLS = [
-  # os.getenv("DISCORD_WEBHOOK_URL"),
+  os.getenv("DISCORD_WEBHOOK_URL"),
   os.getenv("TEST_WEBHOOK")
 ]
 
