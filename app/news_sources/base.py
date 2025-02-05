@@ -18,7 +18,7 @@ class NewsSource(ABC):
   # Fetches latest news articles from source and detects new articles
   async def fetch_news(self, session):
     logging.info(f"Fetching news from {self.name}")
-    try: 
+    try:
       async with session.get(self.rss_url) as response:
         response_text = await response.text()
 
@@ -37,8 +37,8 @@ class NewsSource(ABC):
       if self.last_article_id is None:
         self.last_article_id = article_id
         logging.info(f"Initializing last article id to {article_id}")
-        # return None
-        return self.parse_article(latest_article)
+        return None
+        # return self.parse_article(latest_article)
 
       if article_id != self.last_article_id:
         self.last_article_id = article_id
@@ -47,7 +47,7 @@ class NewsSource(ABC):
 
       logging.info(f"No new articles found for {self.name} (last ID: {self.last_article_id})")
       return None
-    
+
     except Exception as e:
       logging.error(f"Error fetching news from {self.name}: {e}")
       return None

@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 WEBHOOK_URLS = [
-  os.getenv("DISCORD_WEBHOOK_URL"),
-  os.getenv("TEST_WEBHOOK")
+  # "https://discord.com/api/webhooks/1336095023623831602/GwFASaUYNiEQa1T289ilhyItTimhF9wDohoCcb5tBchHsc-9R-T6puOEgB7xmaA7Yep_",
+  "https://discord.com/api/webhooks/1334316248795975781/ivpDNBYUt_n8_2vq7_JGipdwcD5qn2atqEsyjS-FyIJXp6FVucv2iEvGC9kSyFeT3XqO"
 ]
 
 NEWS_SOURCES = {
