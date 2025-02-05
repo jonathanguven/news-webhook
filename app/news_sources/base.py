@@ -24,7 +24,7 @@ class NewsSource(ABC):
 
       feed = feedparser.parse(response_text)
       if not feed.entries:
-        logging.info("No new articles found for {self.name}")
+        logging.info(f"No new articles found for {self.name}")
         return
 
       latest_article = feed.entries[0]
